@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sgcubeconsultants.github.io/sgcube-website/sitemap.xml
