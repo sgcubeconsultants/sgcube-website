@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perspectives — SGCube Consultants Blog</title>
+  <meta name="description" content="Thinking from the intersection of AdTech, Branded Content and Commercial Strategy. Insights from SGCube Consultants." />
+  <meta name="keywords" content="AdTech, programmatic advertising, branded content, creator economy, GEO, AI marketing, commercial strategy, India advertising" />
+  <meta property="og:title" content="Perspectives — SGCube Consultants Blog" />
+  <meta property="og:description" content="Thinking from the intersection of AdTech, Branded Content and Commercial Strategy." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://sgcubeconsultants.com/blog/" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <style>
+    /* ── Blog Listing Page Styles ── */
+    .blog-hero {
+      background: var(--charcoal);
+      padding: 120px 0 80px;
+      text-align: center;
+      border-bottom: 2px solid var(--gold);
+    }
+    .blog-hero .blog-section-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1.2rem;
+    }
+    .blog-hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin: 0 0 1.2rem;
+      line-height: 1.15;
+    }
+    .blog-hero p {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: rgba(245,240,232,0.72);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Cards Grid ── */
+    .blog-grid-section {
+      background: var(--cream);
+      padding: 90px 0 80px;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    /* ── Card ── */
+    .blog-card {
+      background: #fff;
+      border: 1.5px solid rgba(201,160,82,0.18);
+      border-radius: 4px;
+      padding: 2rem 1.8rem 2rem;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      /* slide-up entrance */
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    .blog-card.card-visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+    .blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(45,49,66,0.10);
+      border-color: var(--gold);
+    }
+    .blog-card-tag {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+    .blog-card h2 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.38;
+      margin: 0 0 0.7rem;
+    }
+    .blog-card-excerpt {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: rgba(45,49,66,0.72);
+      line-height: 1.65;
+      margin-bottom: 1.4rem;
+      flex: 1;
+    }
+    .blog-card-meta {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: rgba(45,49,66,0.5);
+      margin-bottom: 1.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 0.6rem;
+    }
+    .blog-card-meta span::after {
+      content: '·';
+      margin-left: 0.6rem;
+    }
+    .blog-card-meta span:last-child::after {
+      content: '';
+    }
+    .blog-read-more {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+      align-self: flex-start;
+    }
+    .blog-read-more:hover {
+      color: var(--gold-dark);
+    }
+
+    /* ── CTA Banner ── */
+    .blog-cta-banner {
+      background: var(--charcoal);
+      padding: 80px 0;
+      text-align: center;
+    }
+    .blog-cta-banner h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin: 0 0 1rem;
+    }
+    .blog-cta-banner p {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: rgba(245,240,232,0.72);
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 640px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+      .blog-grid-section {
+        padding: 60px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../logo.png" alt="SGCube Consultants" class="nav-logo-img" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About Us</a></li>
+        <li><a href="../services.html">Services</a></li>
+        <li><a href="index.html" class="nav-active">Blog</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="../about.html">About Us</a>
+    <a href="../services.html">Services</a>
+    <a href="index.html">Blog</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+
+  <main>
+
+    <!-- PAGE HERO -->
+    <section class="blog-hero">
+      <div class="container">
+        <span class="blog-section-label">SGCube Consultants</span>
+        <h1>Perspectives</h1>
+        <p>Thinking from the intersection of AdTech, Branded Content and Commercial Strategy.</p>
+      </div>
+    </section>
+
+    <!-- BLOG GRID -->
+    <section class="blog-grid-section">
+      <div class="container">
+        <div class="blog-grid">
+
+          <!-- Card 1 -->
+          <article class="blog-card">
+            <div class="blog-card-tag">AdTech &amp; Programmatic</div>
+            <h2>You Approved the Budget. But Do You Know Where It Actually Went?</h2>
+            <p class="blog-card-excerpt">The programmatic supply chain isn't broken. It's working exactly as the middlemen designed it.</p>
+            <div class="blog-card-meta">
+              <span>Sayantan Ghosh</span>
+              <span>March 2026</span>
+              <span>8 min read</span>
+            </div>
+            <a href="post-1.html" class="blog-read-more">Read More →</a>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="blog-card">
+            <div class="blog-card-tag">GEO &amp; AI-era Marketing</div>
+            <h2>The Funnel Didn't Break. The Top of It Just Moved Somewhere You're Not.</h2>
+            <p class="blog-card-excerpt">India is the world's largest AI search market. Most Indian brands aren't in the answers.</p>
+            <div class="blog-card-meta">
+              <span>Sayantan Ghosh</span>
+              <span>March 2026</span>
+              <span>7 min read</span>
+            </div>
+            <a href="post-2.html" class="blog-read-more">Read More →</a>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="blog-card">
+            <div class="blog-card-tag">Branded Content &amp; Creator Economy</div>
+            <h2>You're Not Making Content. You're Making a Long Ad. That's Why It's Not Working.</h2>
+            <p class="blog-card-excerpt">Audiences don't open Instagram or YouTube to watch your campaign. The sooner brands accept that, the better their content will perform.</p>
+            <div class="blog-card-meta">
+              <span>Sayantan Ghosh</span>
+              <span>March 2026</span>
+              <span>7 min read</span>
+            </div>
+            <a href="post-3.html" class="blog-read-more">Read More →</a>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="blog-card">
+            <div class="blog-card-tag">Branded Content &amp; Creator Economy</div>
+            <h2>You're Not Buying Influence. You're Renting Attention. There's a Difference.</h2>
+            <p class="blog-card-excerpt">India has the world's most diverse creator ecosystem. Most brands are activating it like a media buy. That's why it keeps underperforming.</p>
+            <div class="blog-card-meta">
+              <span>Sayantan Ghosh</span>
+              <span>March 2026</span>
+              <span>7 min read</span>
+            </div>
+            <a href="post-4.html" class="blog-read-more">Read More →</a>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="blog-card">
+            <div class="blog-card-tag">Business Strategy &amp; Growth</div>
+            <h2>The First Sale Is Never About the Product. It's About the Narrative Around It.</h2>
+            <p class="blog-card-excerpt">Most early-stage businesses lose because they pitch features before the market understands why the category matters.</p>
+            <div class="blog-card-meta">
+              <span>Sayantan Ghosh</span>
+              <span>March 2026</span>
+              <span>7 min read</span>
+            </div>
+            <a href="post-5.html" class="blog-read-more">Read More →</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="blog-cta-banner">
+      <div class="container">
+        <h2>Want to talk strategy?</h2>
+        <p>We write about what we do. If something resonated, let's have a conversation.</p>
+        <a href="../contact.html" class="btn btn-gold">Get In Touch</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../logo.png" alt="SGCube Consultants" class="footer-logo-img" />
+          <p>Partnering with ambitious organisations to achieve clarity, drive strategy, and deliver lasting results.</p>
+        </div>
+        <div>
+          <div class="footer-heading">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../services.html">Services</a></li>
+            <li><a href="index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Contact</div>
+          <div class="footer-contact-item">
+            <span>Email</span>
+            <span><a href="mailto:sgcubeconsultants@gmail.com" style="color:inherit;">sgcubeconsultants@gmail.com</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <span>Phone</span>
+            <span><a href="tel:+917506244758" style="color:inherit;">+91 75062 44758</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <span>Address</span>
+            <span>4514, 2nd Floor, Sector 23 A<br />Gurgaon – 122001, India</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SGCube Consultants. All rights reserved.</p>
+        <p>Clarity. Strategy. Results.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script>
+    // Card entrance animation on scroll
+    const cards = document.querySelectorAll('.blog-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('card-visible');
+          }, i * 100);
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    cards.forEach(card => cardObserver.observe(card));
+  </script>
+
+</body>
+</html>
