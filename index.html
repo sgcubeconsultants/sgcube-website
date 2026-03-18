@@ -40,7 +40,7 @@
   <nav class="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <img src="logo.svg" alt="SGCube Consultants Logo" class="nav-logo-img" />
+        <img src="logo-light.png" alt="SGCube Consultants Logo" class="nav-logo-img" />
       </a>
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
@@ -195,21 +195,8 @@
             </div>
           </div>
 
-          <div class="sg-how-visual" aria-hidden="true">
-            <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="40"  y="40"  width="320" height="320" stroke="#C9A052" stroke-opacity="0.15" stroke-width="1"/>
-              <rect x="90"  y="90"  width="220" height="220" stroke="#C9A052" stroke-opacity="0.25" stroke-width="1"/>
-              <rect x="140" y="140" width="120" height="120" stroke="#C9A052" stroke-opacity="0.4" stroke-width="1.5"/>
-              <line x1="40"  y1="40"  x2="140" y2="140" stroke="#C9A052" stroke-opacity="0.12" stroke-width="1"/>
-              <line x1="360" y1="40"  x2="260" y2="140" stroke="#C9A052" stroke-opacity="0.12" stroke-width="1"/>
-              <line x1="40"  y1="360" x2="140" y2="260" stroke="#C9A052" stroke-opacity="0.12" stroke-width="1"/>
-              <line x1="360" y1="360" x2="260" y2="260" stroke="#C9A052" stroke-opacity="0.12" stroke-width="1"/>
-              <circle cx="200" cy="200" r="100" stroke="#C9A052" stroke-opacity="0.18" stroke-width="1"/>
-              <circle cx="200" cy="200" r="50"  stroke="#C9A052" stroke-opacity="0.28" stroke-width="1"/>
-              <circle cx="200" cy="200" r="7"   fill="#C9A052" fill-opacity="0.6"/>
-              <line x1="200" y1="40"  x2="200" y2="360" stroke="#C9A052" stroke-opacity="0.07" stroke-width="1"/>
-              <line x1="40"  y1="200" x2="360" y2="200" stroke="#C9A052" stroke-opacity="0.07" stroke-width="1"/>
-            </svg>
+          <div class="orbit-container" aria-hidden="true">
+            <canvas id="orbit-canvas"></canvas>
           </div>
 
         </div>
@@ -278,7 +265,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="logo.svg" alt="SGCube Consultants Logo" class="footer-logo-img" />
+          <img src="logo-light.png" alt="SGCube Consultants Logo" class="footer-logo-img" />
           <p>Partnering with ambitious organisations to achieve clarity, drive strategy, and deliver lasting results.</p>
         </div>
         <div>
@@ -316,142 +303,245 @@
 
   <script src="main.js"></script>
 
-  <!-- Galaxy Canvas — Option A Constellation -->
+  <!-- Galaxy Canvas — Constellation -->
   <script>
   (function() {
     var canvas = document.getElementById('galaxy-canvas');
     if (!canvas) return;
     var ctx = canvas.getContext('2d');
-    var W, H, particles = [], raf;
-    var heroEl = document.getElementById('hero');
-    var heroVisible = true;
-    var dpr = window.devicePixelRatio || 1;
-
-    function isMobile() { return window.innerWidth < 768; }
+    var particles = [];
+    var W, H;
 
     function resize() {
-      var w = canvas.offsetWidth;
-      var h = canvas.offsetHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.scale(dpr, dpr);
-      W = w;
-      H = h;
+      var dpr = window.devicePixelRatio || 1;
+      W = canvas.offsetWidth;
+      H = canvas.offsetHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
-    function createParticles() {
+    function init() {
+      resize();
       particles = [];
-      var count = isMobile() ? 60 : 100;
+      var isMobile = window.innerWidth < 768;
+      var count = isMobile ? 80 : 160;
       for (var i = 0; i < count; i++) {
-        var isGold = Math.random() < 0.2;
+        var isGold = Math.random() < 0.22;
         particles.push({
           x: Math.random() * W,
           y: Math.random() * H,
-          r: isGold ? (1.8 + Math.random() * 1.4) : (0.5 + Math.random() * 1.2),
-          baseOpacity: 0.25 + Math.random() * 0.55,
-          opacity: 0,
-          speed: 0.3 + Math.random() * 0.6,
+          r: isGold ? Math.random() * 2.2 + 1.3 : Math.random() * 1.0 + 0.3,
+          baseOpacity: Math.random() * 0.4 + 0.35,
           phase: Math.random() * Math.PI * 2,
-          gold: isGold,
-          vx: (Math.random() - 0.5) * 0.12,
-          origY: 0
+          twinkleSpeed: Math.random() * 0.02 + 0.008,
+          gold: isGold
         });
-        particles[i].origY = particles[i].y;
       }
     }
 
-    var scrollY = 0;
-    window.addEventListener('scroll', function() { scrollY = window.scrollY; });
-
-    function draw(ts) {
-      if (!heroVisible) { raf = requestAnimationFrame(draw); return; }
+    function draw(t) {
       ctx.clearRect(0, 0, W, H);
 
-      // Central radial glow
-      var grd = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.min(W, H) * 0.6);
-      grd.addColorStop(0, 'rgba(201,160,82,0.07)');
-      grd.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = grd;
+      // Central gold nebula glow — multi-layered for depth
+      var g1 = ctx.createRadialGradient(W * 0.48, H * 0.45, 0, W * 0.48, H * 0.45, W * 0.55);
+      g1.addColorStop(0, 'rgba(201,160,82,0.07)');
+      g1.addColorStop(0.3, 'rgba(201,160,82,0.03)');
+      g1.addColorStop(0.6, 'rgba(160,120,60,0.015)');
+      g1.addColorStop(1, 'transparent');
+      ctx.fillStyle = g1;
       ctx.fillRect(0, 0, W, H);
 
-      var t = ts * 0.001;
+      // Secondary off-center glow for asymmetry
+      var g2 = ctx.createRadialGradient(W * 0.3, H * 0.35, 0, W * 0.3, H * 0.35, W * 0.3);
+      g2.addColorStop(0, 'rgba(201,160,82,0.025)');
+      g2.addColorStop(1, 'transparent');
+      ctx.fillStyle = g2;
+      ctx.fillRect(0, 0, W, H);
 
-      // Update positions
+      // PASS 1: Draw connecting lines first (behind particles)
       for (var i = 0; i < particles.length; i++) {
         var p = particles[i];
-        p.opacity = p.baseOpacity * (0.5 + 0.5 * Math.sin(t * p.speed + p.phase));
-        p.x += p.vx;
-        p.y = p.origY + scrollY * (0.15 + p.speed * 0.15);
-        if (p.x < -2) p.x = W + 2;
-        if (p.x > W + 2) p.x = -2;
-      }
-
-      // Draw constellation lines between gold particles within 90px
-      for (var i = 0; i < particles.length; i++) {
-        var a = particles[i];
-        if (!a.gold) continue;
+        if (!p.gold) continue;
         for (var j = i + 1; j < particles.length; j++) {
-          var b = particles[j];
-          if (!b.gold) continue;
-          var dx = a.x - b.x;
-          var dy = a.y - b.y;
+          var q = particles[j];
+          if (!q.gold && Math.random() > 0.3) continue;
+          var dx = p.x - q.x, dy = p.y - q.y;
           var dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 90) {
+          var maxDist = 120;
+          if (dist < maxDist) {
+            var lineOpacity = 0.08 * (1 - dist / maxDist);
             ctx.beginPath();
-            ctx.strokeStyle = 'rgba(201,160,82,' + (0.06 * (1 - dist / 90)).toFixed(3) + ')';
-            ctx.lineWidth = 0.6;
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = 'rgba(201,160,82,' + lineOpacity.toFixed(3) + ')';
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
       }
 
-      // Draw particles
+      // PASS 2: Draw particles on top
       for (var i = 0; i < particles.length; i++) {
         var p = particles[i];
+        p.phase += p.twinkleSpeed;
+        var flicker = 0.5 + 0.5 * Math.sin(p.phase + t * 0.0008);
+        var opacity = p.baseOpacity * flicker;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         if (p.gold) {
-          // Glow halo
-          var halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
-          halo.addColorStop(0, 'rgba(201,160,82,' + (p.opacity * 0.4).toFixed(3) + ')');
-          halo.addColorStop(1, 'rgba(201,160,82,0)');
+          ctx.fillStyle = 'rgba(201,160,82,' + opacity.toFixed(3) + ')';
+        } else {
+          ctx.fillStyle = 'rgba(232,228,220,' + (opacity * 0.65).toFixed(3) + ')';
+        }
+        ctx.fill();
+
+        // Gold particle glow halo
+        if (p.gold) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
-          ctx.fillStyle = halo;
-          ctx.fill();
-          // Core
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(201,160,82,' + p.opacity + ')';
-          ctx.fill();
-        } else {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(232,228,220,' + p.opacity + ')';
+          ctx.fillStyle = 'rgba(201,160,82,' + (0.035 * flicker).toFixed(3) + ')';
           ctx.fill();
         }
       }
 
-      raf = requestAnimationFrame(draw);
+      requestAnimationFrame(draw);
     }
 
-    // Pause when not in viewport
-    if (window.IntersectionObserver) {
-      var obs = new IntersectionObserver(function(entries) {
-        heroVisible = entries[0].isIntersecting;
-      });
-      obs.observe(heroEl);
+    init();
+    window.addEventListener('resize', function() { init(); });
+    requestAnimationFrame(draw);
+  })();
+  </script>
+
+  <!-- Orbit Canvas — How We Work -->
+  <script>
+  (function() {
+    var canvas = document.getElementById('orbit-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [], rings = [];
+    var W, H, cx, cy;
+    var started = false;
+
+    function resize() {
+      var dpr = window.devicePixelRatio || 1;
+      W = canvas.offsetWidth;
+      H = canvas.offsetHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx = W / 2;
+      cy = H / 2;
     }
 
-    window.addEventListener('resize', function() {
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
+    function init() {
       resize();
-      createParticles();
-    });
+      particles = [];
+      rings = [];
+      var minDim = Math.min(W, H);
+      var ringRadii = [0.14, 0.22, 0.32, 0.42];
+      for (var r = 0; r < ringRadii.length; r++) {
+        rings.push({ radius: ringRadii[r] * minDim, opacity: 0.07 + r * 0.01 });
+      }
+      // Background stars
+      for (var i = 0; i < 40; i++) {
+        particles.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: Math.random() * 0.8 + 0.3,
+          opacity: Math.random() * 0.3 + 0.1,
+          phase: Math.random() * Math.PI * 2,
+          orbiting: false, gold: false
+        });
+      }
+      // Orbiting particles
+      for (var r = 0; r < rings.length; r++) {
+        var count = 5 + r * 3;
+        for (var i = 0; i < count; i++) {
+          var isGold = Math.random() < 0.3;
+          particles.push({
+            orbitRadius: rings[r].radius + (Math.random() - 0.5) * 8,
+            orbitAngle: Math.random() * Math.PI * 2,
+            orbitSpeed: (0.004 + Math.random() * 0.003) * (Math.random() > 0.5 ? 1 : -1) / (1 + r * 0.3),
+            orbitEllipse: 0.55 + Math.random() * 0.1,
+            r: isGold ? Math.random() * 1.8 + 1.0 : Math.random() * 0.9 + 0.3,
+            opacity: Math.random() * 0.5 + 0.4,
+            phase: Math.random() * Math.PI * 2,
+            orbiting: true, gold: isGold, x: 0, y: 0
+          });
+        }
+      }
+    }
 
-    resize();
-    createParticles();
-    raf = requestAnimationFrame(draw);
+    function draw(t) {
+      ctx.clearRect(0, 0, W, H);
+
+      // Central glow
+      var grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, W * 0.35);
+      grd.addColorStop(0, 'rgba(201,160,82,0.06)');
+      grd.addColorStop(0.5, 'rgba(201,160,82,0.02)');
+      grd.addColorStop(1, 'transparent');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, W, H);
+
+      // Orbit ring paths
+      for (var r = 0; r < rings.length; r++) {
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, rings[r].radius, rings[r].radius * 0.58, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(201,160,82,' + rings[r].opacity + ')';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+
+      // Central dot + halo
+      ctx.beginPath();
+      ctx.arc(cx, cy, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(201,160,82,0.7)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cx, cy, 10, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(201,160,82,0.08)';
+      ctx.fill();
+
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        p.phase += 0.01;
+        if (p.orbiting) {
+          p.orbitAngle += p.orbitSpeed;
+          p.x = cx + Math.cos(p.orbitAngle) * p.orbitRadius;
+          p.y = cy + Math.sin(p.orbitAngle) * p.orbitRadius * p.orbitEllipse;
+        }
+        var flicker = 0.5 + 0.5 * Math.sin(p.phase + t * 0.001);
+        var opacity = p.opacity * flicker;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.gold
+          ? 'rgba(201,160,82,' + opacity.toFixed(3) + ')'
+          : 'rgba(232,228,220,' + (opacity * 0.5).toFixed(3) + ')';
+        ctx.fill();
+        if (p.gold && p.orbiting) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(201,160,82,' + (0.04 * flicker).toFixed(3) + ')';
+          ctx.fill();
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+
+    init();
+    window.addEventListener('resize', function() { init(); });
+
+    // Only start when visible
+    var observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && !started) {
+        started = true;
+        requestAnimationFrame(draw);
+        observer.disconnect();
+      }
+    }, { threshold: 0.1 });
+    observer.observe(canvas);
   })();
   </script>
 

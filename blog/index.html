@@ -161,6 +161,19 @@
       color: var(--gold-bright);
     }
 
+    /* Clickable card titles */
+    .blog-card-title-link {
+      color: var(--text-heading);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .blog-card-title-link:hover {
+      color: var(--gold);
+    }
+    .blog-card {
+      cursor: pointer;
+    }
+
     /* ── CTA Banner ── */
     .blog-cta-banner {
       background: var(--bg-deep);
@@ -205,7 +218,7 @@
   <nav class="navbar">
     <div class="nav-inner">
       <a href="../index.html" class="nav-logo">
-        <img src="../logo.svg" alt="SGCube Consultants Logo" class="nav-logo-img" />
+        <img src="../logo-light.png" alt="SGCube Consultants Logo" class="nav-logo-img" />
       </a>
       <ul class="nav-links">
         <li><a href="../index.html">Home</a></li>
@@ -247,7 +260,7 @@
           <!-- Card 1 -->
           <article class="blog-card">
             <div class="blog-card-tag">AdTech &amp; Programmatic</div>
-            <h2>You Approved the Budget. But Do You Know Where It Actually Went?</h2>
+            <h2><a href="programmatic-supply-chain-transparency-india.html" class="blog-card-title-link">You Approved the Budget. But Do You Know Where It Actually Went?</a></h2>
             <p class="blog-card-excerpt">The programmatic supply chain isn't broken. It's working exactly as the middlemen designed it.</p>
             <div class="blog-card-meta">
               <span>Sayantan Ghosh</span>
@@ -260,7 +273,7 @@
           <!-- Card 2 -->
           <article class="blog-card">
             <div class="blog-card-tag">GEO &amp; AI-era Marketing</div>
-            <h2>The Funnel Didn't Break. The Top of It Just Moved Somewhere You're Not.</h2>
+            <h2><a href="geo-ai-search-india-brand-visibility.html" class="blog-card-title-link">The Funnel Didn't Break. The Top of It Just Moved Somewhere You're Not.</a></h2>
             <p class="blog-card-excerpt">India is the world's largest AI search market. Most Indian brands aren't in the answers.</p>
             <div class="blog-card-meta">
               <span>Sayantan Ghosh</span>
@@ -273,7 +286,7 @@
           <!-- Card 3 -->
           <article class="blog-card">
             <div class="blog-card-tag">Branded Content &amp; Creator Economy</div>
-            <h2>You're Not Making Content. You're Making a Long Ad. That's Why It's Not Working.</h2>
+            <h2><a href="branded-content-strategy-india.html" class="blog-card-title-link">You're Not Making Content. You're Making a Long Ad. That's Why It's Not Working.</a></h2>
             <p class="blog-card-excerpt">Audiences don't open Instagram or YouTube to watch your campaign. The sooner brands accept that, the better their content will perform.</p>
             <div class="blog-card-meta">
               <span>Sayantan Ghosh</span>
@@ -286,7 +299,7 @@
           <!-- Card 4 -->
           <article class="blog-card">
             <div class="blog-card-tag">Branded Content &amp; Creator Economy</div>
-            <h2>You're Not Buying Influence. You're Renting Attention. There's a Difference.</h2>
+            <h2><a href="influencer-marketing-india-strategy.html" class="blog-card-title-link">You're Not Buying Influence. You're Renting Attention. There's a Difference.</a></h2>
             <p class="blog-card-excerpt">India has the world's most diverse creator ecosystem. Most brands are activating it like a media buy. That's why it keeps underperforming.</p>
             <div class="blog-card-meta">
               <span>Sayantan Ghosh</span>
@@ -299,7 +312,7 @@
           <!-- Card 5 -->
           <article class="blog-card">
             <div class="blog-card-tag">Business Strategy &amp; Growth</div>
-            <h2>The First Sale Is Never About the Product. It's About the Narrative Around It.</h2>
+            <h2><a href="revenue-architecture-zero-to-one.html" class="blog-card-title-link">The First Sale Is Never About the Product. It's About the Narrative Around It.</a></h2>
             <p class="blog-card-excerpt">Most early-stage businesses lose because they pitch features before the market understands why the category matters.</p>
             <div class="blog-card-meta">
               <span>Sayantan Ghosh</span>
@@ -312,7 +325,7 @@
           <!-- Card 6 — NEW -->
           <article class="blog-card">
             <div class="blog-card-tag">AdTech &amp; Programmatic</div>
-            <h2>The Cookie Is Dead. DPDP Just Buried the Grave.</h2>
+            <h2><a href="dpdp-compliance-adtech-india.html" class="blog-card-title-link">The Cookie Is Dead. DPDP Just Buried the Grave.</a></h2>
             <p class="blog-card-excerpt">India's DPDP Act is now operational. Enforcement begins May 2027. Penalties up to ₹250 crore. Here's what every AdTech business needs to do right now.</p>
             <div class="blog-card-meta">
               <span>Sayantan Ghosh</span>
@@ -342,7 +355,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="../logo.svg" alt="SGCube Consultants Logo" class="footer-logo-img" />
+          <img src="../logo-light.png" alt="SGCube Consultants Logo" class="footer-logo-img" />
           <p>Partnering with ambitious organisations to achieve clarity, drive strategy, and deliver lasting results.</p>
         </div>
         <div>
@@ -392,6 +405,19 @@
       });
     }, { threshold: 0.08 });
     cards.forEach(card => cardObserver.observe(card));
+
+    // Make entire card clickable
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.blog-card').forEach(function(card) {
+        var link = card.querySelector('a[href]');
+        if (link) {
+          card.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') return;
+            window.location.href = link.href;
+          });
+        }
+      });
+    });
   </script>
 
 </body>

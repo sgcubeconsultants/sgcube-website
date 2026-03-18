@@ -1520,6 +1520,21 @@ textarea {
   height: auto;
 }
 
+/* Orbit canvas container */
+.orbit-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.orbit-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* ---- Who We Are teaser ---- */
 .sg-who {
   background: var(--bg-secondary);
@@ -1972,6 +1987,7 @@ textarea {
   .sg-values-grid  { grid-template-columns: repeat(2, 1fr); }
   .sg-how-layout   { grid-template-columns: 1fr; gap: 3rem; }
   .sg-how-visual   { display: none; }
+  .orbit-container { max-width: 320px; }
 }
 
 @media (max-width: 768px) {
@@ -1980,4 +1996,5 @@ textarea {
   .sg-values-grid  { grid-template-columns: 1fr; }
   .sg-page-header  { padding: 120px 0 60px; }
   .sg-tab-btn      { padding: 0.75rem 0.9rem; font-size: 0.72rem; }
+  .orbit-container { max-width: 260px; margin: 2rem auto 0; }
 }
