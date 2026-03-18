@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perspectives | SGCube Consultants</title>
   <meta name="description" content="Thinking from the intersection of AdTech, Branded Content and Commercial Strategy. Insights and perspectives from SGCube Consultants." />
-  <meta name="keywords" content="AdTech, programmatic advertising, branded content, creator economy, GEO, AI marketing, commercial strategy, India advertising, influencer marketing India" />
+  <meta name="keywords" content="AdTech, programmatic advertising, branded content, creator economy, GEO, AI marketing, commercial strategy, India advertising, influencer marketing India, DPDP compliance" />
   <meta name="author" content="Sayantan Ghosh" />
   <meta name="robots" content="index, follow" />
   <meta name="google-site-verification" content="DFzYO7GrdIReTPVVvmhDDKcvOPe83YbHmYFyNvwjWv0" />
@@ -36,7 +36,7 @@
   <style>
     /* ── Blog Listing Page Styles ── */
     .blog-hero {
-      background: var(--charcoal);
+      background: var(--bg-deep);
       padding: 120px 0 80px;
       text-align: center;
       border-bottom: 2px solid var(--gold);
@@ -55,14 +55,14 @@
       font-family: var(--font-heading);
       font-size: clamp(2.4rem, 5vw, 3.8rem);
       font-weight: 700;
-      color: var(--cream);
+      color: var(--text-heading);
       margin: 0 0 1.2rem;
       line-height: 1.15;
     }
     .blog-hero p {
       font-family: var(--font-body);
       font-size: 1.05rem;
-      color: rgba(245,240,232,0.72);
+      color: var(--text-secondary);
       max-width: 580px;
       margin: 0 auto;
       line-height: 1.7;
@@ -70,7 +70,7 @@
 
     /* ── Cards Grid ── */
     .blog-grid-section {
-      background: var(--cream);
+      background: var(--bg-primary);
       padding: 90px 0 80px;
     }
     .blog-grid {
@@ -81,14 +81,13 @@
 
     /* ── Card ── */
     .blog-card {
-      background: #fff;
-      border: 1.5px solid rgba(201,160,82,0.18);
+      background: var(--bg-card);
+      border: 1.5px solid var(--gold-border);
       border-radius: 4px;
       padding: 2rem 1.8rem 2rem;
       display: flex;
       flex-direction: column;
       transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
-      /* slide-up entrance */
       opacity: 0;
       transform: translateY(32px);
     }
@@ -99,7 +98,7 @@
     }
     .blog-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(45,49,66,0.10);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
       border-color: var(--gold);
     }
     .blog-card-tag {
@@ -115,14 +114,18 @@
       font-family: var(--font-heading);
       font-size: 1.15rem;
       font-weight: 700;
-      color: var(--charcoal);
+      color: var(--text-heading);
       line-height: 1.38;
       margin: 0 0 0.7rem;
+      transition: color 0.2s ease;
+    }
+    .blog-card:hover h2 {
+      color: var(--gold);
     }
     .blog-card-excerpt {
       font-family: var(--font-body);
       font-size: 0.88rem;
-      color: rgba(45,49,66,0.72);
+      color: var(--text-secondary);
       line-height: 1.65;
       margin-bottom: 1.4rem;
       flex: 1;
@@ -130,7 +133,7 @@
     .blog-card-meta {
       font-family: var(--font-body);
       font-size: 0.78rem;
-      color: rgba(45,49,66,0.5);
+      color: var(--text-muted);
       margin-bottom: 1.4rem;
       display: flex;
       flex-wrap: wrap;
@@ -155,12 +158,12 @@
       align-self: flex-start;
     }
     .blog-read-more:hover {
-      color: var(--gold-dark);
+      color: var(--gold-bright);
     }
 
     /* ── CTA Banner ── */
     .blog-cta-banner {
-      background: var(--charcoal);
+      background: var(--bg-deep);
       padding: 80px 0;
       text-align: center;
     }
@@ -168,13 +171,13 @@
       font-family: var(--font-heading);
       font-size: clamp(1.7rem, 3.5vw, 2.4rem);
       font-weight: 700;
-      color: var(--cream);
+      color: var(--text-heading);
       margin: 0 0 1rem;
     }
     .blog-cta-banner p {
       font-family: var(--font-body);
       font-size: 1rem;
-      color: rgba(245,240,232,0.72);
+      color: var(--text-secondary);
       max-width: 520px;
       margin: 0 auto 2rem;
       line-height: 1.7;
@@ -208,7 +211,7 @@
         <li><a href="../index.html">Home</a></li>
         <li><a href="../about.html">About Us</a></li>
         <li><a href="../services.html">Services</a></li>
-        <li><a href="index.html" class="nav-active">Blog</a></li>
+        <li><a href="index.html" class="active">Blog</a></li>
         <li><a href="../contact.html">Contact</a></li>
       </ul>
       <button class="hamburger" aria-label="Toggle menu">
@@ -221,7 +224,7 @@
     <a href="../index.html">Home</a>
     <a href="../about.html">About Us</a>
     <a href="../services.html">Services</a>
-    <a href="index.html">Blog</a>
+    <a href="index.html" class="active">Blog</a>
     <a href="../contact.html">Contact</a>
   </div>
 
@@ -251,7 +254,7 @@
               <span>March 2026</span>
               <span>8 min read</span>
             </div>
-            <a href="post-1.html" class="blog-read-more">Read More →</a>
+            <a href="programmatic-supply-chain-transparency-india.html" class="blog-read-more">Read More →</a>
           </article>
 
           <!-- Card 2 -->
@@ -264,7 +267,7 @@
               <span>March 2026</span>
               <span>7 min read</span>
             </div>
-            <a href="post-2.html" class="blog-read-more">Read More →</a>
+            <a href="geo-ai-search-india-brand-visibility.html" class="blog-read-more">Read More →</a>
           </article>
 
           <!-- Card 3 -->
@@ -277,7 +280,7 @@
               <span>March 2026</span>
               <span>7 min read</span>
             </div>
-            <a href="post-3.html" class="blog-read-more">Read More →</a>
+            <a href="branded-content-strategy-india.html" class="blog-read-more">Read More →</a>
           </article>
 
           <!-- Card 4 -->
@@ -290,7 +293,7 @@
               <span>March 2026</span>
               <span>7 min read</span>
             </div>
-            <a href="post-4.html" class="blog-read-more">Read More →</a>
+            <a href="influencer-marketing-india-strategy.html" class="blog-read-more">Read More →</a>
           </article>
 
           <!-- Card 5 -->
@@ -303,7 +306,20 @@
               <span>March 2026</span>
               <span>7 min read</span>
             </div>
-            <a href="post-5.html" class="blog-read-more">Read More →</a>
+            <a href="revenue-architecture-zero-to-one.html" class="blog-read-more">Read More →</a>
+          </article>
+
+          <!-- Card 6 — NEW -->
+          <article class="blog-card">
+            <div class="blog-card-tag">AdTech &amp; Programmatic</div>
+            <h2>The Cookie Is Dead. DPDP Just Buried the Grave.</h2>
+            <p class="blog-card-excerpt">India's DPDP Act is now operational. Enforcement begins May 2027. Penalties up to ₹250 crore. Here's what every AdTech business needs to do right now.</p>
+            <div class="blog-card-meta">
+              <span>Sayantan Ghosh</span>
+              <span>March 2026</span>
+              <span>12 min read</span>
+            </div>
+            <a href="dpdp-compliance-adtech-india.html" class="blog-read-more">Read More →</a>
           </article>
 
         </div>
@@ -364,7 +380,6 @@
 
   <script src="../main.js"></script>
   <script>
-    // Card entrance animation on scroll
     const cards = document.querySelectorAll('.blog-card');
     const cardObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {

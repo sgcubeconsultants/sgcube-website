@@ -31,7 +31,7 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
-        <li><a href="services.html">Services</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
         <li><a href="blog/index.html">Blog</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -44,7 +44,7 @@
   <div class="mobile-menu">
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
-    <a href="services.html">Services</a>
+    <a href="services.html" class="active">Services</a>
     <a href="blog/index.html">Blog</a>
     <a href="contact.html">Contact</a>
   </div>
@@ -74,7 +74,7 @@
         <div class="sg-tab-panel active" id="tab-business" role="tabpanel">
           <div class="sg-svc-grid">
 
-            <div class="sg-svc-card">
+            <div class="sg-svc-card animate-on-scroll">
               <svg class="sg-svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
               </svg>
@@ -82,7 +82,7 @@
               <p class="sg-svc-desc">We work with leadership teams to define clear, actionable growth strategies. From market analysis to long-term roadmaps, we turn ambition into structured plans that deliver measurable results.</p>
             </div>
 
-            <div class="sg-svc-card">
+            <div class="sg-svc-card animate-on-scroll" style="transition-delay:80ms">
               <svg class="sg-svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
               </svg>
@@ -90,7 +90,7 @@
               <p class="sg-svc-desc">Entering a new market requires more than opportunity — it demands precision. We guide businesses through competitive landscapes, regulatory nuances and go-to-market execution across India and beyond.</p>
             </div>
 
-            <div class="sg-svc-card">
+            <div class="sg-svc-card animate-on-scroll" style="transition-delay:160ms">
               <svg class="sg-svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
               </svg>
@@ -291,7 +291,6 @@
 
   <script src="main.js"></script>
   <script>
-    // ---- Tab switching with stagger animation ----
     const tabBtns   = document.querySelectorAll('.sg-tab-btn');
     const tabPanels = document.querySelectorAll('.sg-tab-panel');
 
@@ -302,7 +301,6 @@
       });
       tabPanels.forEach(p => p.classList.toggle('active', p.id === id));
 
-      // Stagger-animate cards in the newly active panel
       const panel = document.getElementById(id);
       if (!panel) return;
       panel.querySelectorAll('.sg-svc-card').forEach((card, i) => {
@@ -316,8 +314,6 @@
     }
 
     tabBtns.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.tab)));
-
-    // Initialise first tab on load
     activateTab('tab-business');
   </script>
 

@@ -19,38 +19,6 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <style>
-    /* ---- Map embed ---- */
-    .map-embed {
-      width: 100%;
-      height: 350px;
-      border: 1.5px solid #C9A052;
-      display: block;
-    }
-
-    /* ---- Office hours ---- */
-    .hours-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 0.5rem;
-    }
-
-    .hours-table td {
-      padding: 0.45rem 0;
-      font-size: 0.88rem;
-      color: var(--charcoal-50);
-      border-bottom: 1px solid rgba(45,49,66,0.08);
-    }
-
-    .hours-table td:last-child {
-      text-align: right;
-      color: var(--charcoal-80);
-    }
-
-    .hours-table tr:last-child td {
-      border-bottom: none;
-    }
-  </style>
 </head>
 <body>
 
@@ -65,7 +33,7 @@
         <li><a href="about.html">About Us</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="blog/index.html">Blog</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
       <button class="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -78,7 +46,7 @@
     <a href="about.html">About Us</a>
     <a href="services.html">Services</a>
     <a href="blog/index.html">Blog</a>
-    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="active">Contact</a>
   </div>
 
   <main>
@@ -209,28 +177,28 @@
     </section>
 
     <!-- WHY REACH OUT STRIP -->
-    <section style="background:var(--cream); padding:70px 0; border-top:1px solid rgba(201,160,82,0.25);">
+    <section style="background: var(--bg-secondary); padding:70px 0; border-top:1px solid var(--gold-border);">
       <div class="container">
-        <div class="section-header center reveal">
+        <div class="section-header center reveal" style="text-align:center;">
           <span class="section-label">What to Expect</span>
           <div class="gold-line center"></div>
           <h2>Our Promise to You</h2>
         </div>
         <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:1rem;">
 
-          <div class="value-card reveal">
+          <div class="value-card reveal animate-on-scroll">
             <div style="font-size:2rem; color:var(--gold); margin-bottom:1rem;">→</div>
             <h3>A Prompt Response</h3>
             <p>We respond to every enquiry within one business day — because your time matters as much as ours.</p>
           </div>
 
-          <div class="value-card reveal">
+          <div class="value-card reveal animate-on-scroll" style="transition-delay:80ms">
             <div style="font-size:2rem; color:var(--gold); margin-bottom:1rem;">◎</div>
             <h3>A Genuine Conversation</h3>
             <p>No sales pitch. Just an honest conversation about your situation and whether — and how — we can help.</p>
           </div>
 
-          <div class="value-card reveal">
+          <div class="value-card reveal animate-on-scroll" style="transition-delay:160ms">
             <div style="font-size:2rem; color:var(--gold); margin-bottom:1rem;">✦</div>
             <h3>Complete Confidentiality</h3>
             <p>Everything you share is treated with absolute discretion, protected by our professional confidentiality standards.</p>
