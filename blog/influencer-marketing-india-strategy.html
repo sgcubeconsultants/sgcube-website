@@ -127,27 +127,29 @@
     .blog-cta p { font-family: var(--font-body); font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin: 0 0 1rem; }
     .cta-button { font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--gold); padding: 0.45rem 1rem; border-radius: 2px; display: inline-block; transition: background 0.2s ease, color 0.2s ease; }
     .cta-button:hover { background: var(--gold); color: var(--bg-deep); }
-    .blog-float-nav { position: fixed; left: 1.5rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.6rem; opacity: 0; transition: opacity 0.4s ease; z-index: 100; pointer-events: none; }
-    .blog-float-nav.visible { opacity: 1; pointer-events: auto; }
-    .blog-float-nav a { font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); text-decoration: none; writing-mode: vertical-rl; transform: rotate(180deg); padding: 0.8rem 0.4rem; border-left: 2px solid var(--gold-border); transition: border-color 0.2s ease, color 0.2s ease; }
-    .blog-float-nav a:hover { border-color: var(--gold); color: var(--gold-bright); }
-    @media (max-width: 1280px) { .blog-float-nav { display: none; } }
     @media (max-width: 768px) { .post-wrap { padding: 60px 0 80px; } .post-body { font-size: 16px; } }
   </style>
 </head>
 <body>
 
   <!-- FLOATING NAV -->
-  <nav class="blog-float-nav" id="floatNav">
-    <a href="index.html">← All Posts</a>
-    <a href="revenue-architecture-zero-to-one.html">Revenue Architecture →</a>
-  </nav>
+  <div id="blog-float-nav" class="blog-float-nav">
+    <a href="index.html" class="float-nav-back">
+      <span class="float-nav-arrow">←</span>
+      <span class="float-nav-label">All Perspectives</span>
+    </a>
+    <div class="float-nav-divider"></div>
+    <a href="revenue-architecture-zero-to-one.html" class="float-nav-next">
+      <span class="float-nav-label-small">Read next</span>
+      <span class="float-nav-title">Revenue Architecture →</span>
+    </a>
+  </div>
 
   <!-- NAVIGATION -->
   <nav class="navbar">
     <div class="nav-inner">
       <a href="../index.html" class="nav-logo">
-        <img src="../logo.png" alt="SGCube Consultants Logo" class="nav-logo-img" />
+        <img src="../logo.svg" alt="SGCube Consultants Logo" class="nav-logo-img" />
       </a>
       <ul class="nav-links">
         <li><a href="../index.html">Home</a></li>
@@ -318,7 +320,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="../logo.png" alt="SGCube Consultants Logo" class="footer-logo-img" />
+          <img src="../logo.svg" alt="SGCube Consultants Logo" class="footer-logo-img" />
           <p>Partnering with ambitious organisations to achieve clarity, drive strategy, and deliver lasting results.</p>
         </div>
         <div>
@@ -356,7 +358,7 @@
 
   <script src="../main.js"></script>
   <script>
-    const floatNav = document.getElementById('floatNav');
+    const floatNav = document.getElementById('blog-float-nav');
     window.addEventListener('scroll', function() {
       if (window.scrollY > 300) {
         floatNav.classList.add('visible');

@@ -40,7 +40,7 @@
   <nav class="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <img src="logo.png" alt="SGCube Consultants Logo" class="nav-logo-img" />
+        <img src="logo.svg" alt="SGCube Consultants Logo" class="nav-logo-img" />
       </a>
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
@@ -278,7 +278,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="logo.png" alt="SGCube Consultants Logo" class="footer-logo-img" />
+          <img src="logo.svg" alt="SGCube Consultants Logo" class="footer-logo-img" />
           <p>Partnering with ambitious organisations to achieve clarity, drive strategy, and deliver lasting results.</p>
         </div>
         <div>
@@ -316,7 +316,7 @@
 
   <script src="main.js"></script>
 
-  <!-- Galaxy Canvas -->
+  <!-- Galaxy Canvas — Option A Constellation -->
   <script>
   (function() {
     var canvas = document.getElementById('galaxy-canvas');
@@ -325,30 +325,35 @@
     var W, H, particles = [], raf;
     var heroEl = document.getElementById('hero');
     var heroVisible = true;
+    var dpr = window.devicePixelRatio || 1;
 
     function isMobile() { return window.innerWidth < 768; }
 
     function resize() {
-      W = canvas.width = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
+      var w = canvas.offsetWidth;
+      var h = canvas.offsetHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.scale(dpr, dpr);
+      W = w;
+      H = h;
     }
 
     function createParticles() {
       particles = [];
-      var count = isMobile() ? 80 : 200;
+      var count = isMobile() ? 60 : 100;
       for (var i = 0; i < count; i++) {
-        var isGold = Math.random() < 0.1;
+        var isGold = Math.random() < 0.2;
         particles.push({
           x: Math.random() * W,
           y: Math.random() * H,
-          r: isGold ? (1.5 + Math.random() * 1.5) : (0.5 + Math.random() * 1.5),
-          baseOpacity: 0.2 + Math.random() * 0.6,
+          r: isGold ? (1.8 + Math.random() * 1.4) : (0.5 + Math.random() * 1.2),
+          baseOpacity: 0.25 + Math.random() * 0.55,
           opacity: 0,
-          speed: 0.3 + Math.random() * 0.7,
+          speed: 0.3 + Math.random() * 0.6,
           phase: Math.random() * Math.PI * 2,
           gold: isGold,
-          vx: (Math.random() - 0.5) * 0.15,
-          vy: (Math.random() - 0.5) * 0.15,
+          vx: (Math.random() - 0.5) * 0.12,
           origY: 0
         });
         particles[i].origY = particles[i].y;
@@ -356,9 +361,7 @@
     }
 
     var scrollY = 0;
-    window.addEventListener('scroll', function() {
-      scrollY = window.scrollY;
-    });
+    window.addEventListener('scroll', function() { scrollY = window.scrollY; });
 
     function draw(ts) {
       if (!heroVisible) { raf = requestAnimationFrame(draw); return; }
@@ -366,30 +369,69 @@
 
       // Central radial glow
       var grd = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.min(W, H) * 0.6);
-      grd.addColorStop(0, 'rgba(201,160,82,0.06)');
+      grd.addColorStop(0, 'rgba(201,160,82,0.07)');
       grd.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = grd;
       ctx.fillRect(0, 0, W, H);
 
       var t = ts * 0.001;
+
+      // Update positions
       for (var i = 0; i < particles.length; i++) {
         var p = particles[i];
         p.opacity = p.baseOpacity * (0.5 + 0.5 * Math.sin(t * p.speed + p.phase));
         p.x += p.vx;
-        p.y = p.origY + scrollY * (0.2 + p.speed * 0.2);
-
+        p.y = p.origY + scrollY * (0.15 + p.speed * 0.15);
         if (p.x < -2) p.x = W + 2;
         if (p.x > W + 2) p.x = -2;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        if (p.gold) {
-          ctx.fillStyle = 'rgba(201,160,82,' + p.opacity + ')';
-        } else {
-          ctx.fillStyle = 'rgba(232,228,220,' + p.opacity + ')';
-        }
-        ctx.fill();
       }
+
+      // Draw constellation lines between gold particles within 90px
+      for (var i = 0; i < particles.length; i++) {
+        var a = particles[i];
+        if (!a.gold) continue;
+        for (var j = i + 1; j < particles.length; j++) {
+          var b = particles[j];
+          if (!b.gold) continue;
+          var dx = a.x - b.x;
+          var dy = a.y - b.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 90) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(201,160,82,' + (0.06 * (1 - dist / 90)).toFixed(3) + ')';
+            ctx.lineWidth = 0.6;
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        if (p.gold) {
+          // Glow halo
+          var halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+          halo.addColorStop(0, 'rgba(201,160,82,' + (p.opacity * 0.4).toFixed(3) + ')');
+          halo.addColorStop(1, 'rgba(201,160,82,0)');
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+          ctx.fillStyle = halo;
+          ctx.fill();
+          // Core
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(201,160,82,' + p.opacity + ')';
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(232,228,220,' + p.opacity + ')';
+          ctx.fill();
+        }
+      }
+
       raf = requestAnimationFrame(draw);
     }
 
@@ -402,6 +444,7 @@
     }
 
     window.addEventListener('resize', function() {
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       resize();
       createParticles();
     });

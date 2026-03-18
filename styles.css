@@ -202,7 +202,6 @@ section {
   height: 60px;
   width: auto;
   display: block;
-  filter: brightness(1.8) contrast(0.9);
 }
 
 .nav-logo-main {
@@ -369,7 +368,6 @@ footer {
   display: block;
   border-radius: 3px;
   margin-bottom: 1rem;
-  filter: brightness(1.8) contrast(0.9);
 }
 
 .footer-grid {
@@ -1569,6 +1567,20 @@ textarea {
   background: var(--bg-secondary);
   padding: 160px 0 80px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.sg-page-header::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(201,160,82,0.07) 0%, transparent 65%);
+  pointer-events: none;
 }
 
 .sg-page-header h1 {
@@ -1672,6 +1684,13 @@ textarea {
   line-height: 1.78;
 }
 
+/* ---- About page divider ---- */
+.about-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-border), transparent);
+  margin: 0;
+}
+
 /* ---- About copy ---- */
 .sg-about-copy {
   background: var(--bg-primary);
@@ -1708,6 +1727,7 @@ textarea {
 .sg-value-card {
   background: var(--bg-card);
   border: 1px solid var(--gold-border);
+  border-top: 3px solid var(--gold);
   padding: 2.5rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
