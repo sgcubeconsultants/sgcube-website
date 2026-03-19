@@ -40,6 +40,12 @@
       padding: 120px 0 80px;
       text-align: center;
       border-bottom: 2px solid var(--gold);
+      position: relative;
+      overflow: hidden;
+    }
+    .blog-hero-content {
+      position: relative;
+      z-index: 2;
     }
     .blog-hero .blog-section-label {
       font-family: var(--font-body);
@@ -245,7 +251,8 @@
 
     <!-- PAGE HERO -->
     <section class="blog-hero">
-      <div class="container">
+      <canvas id="galaxy-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;"></canvas>
+      <div class="container blog-hero-content">
         <span class="blog-section-label">SGCube Consultants</span>
         <h1>Perspectives</h1>
         <p>Thinking from the intersection of AdTech, Branded Content and Commercial Strategy.</p>
@@ -418,6 +425,137 @@
         }
       });
     });
+  </script>
+
+  <!-- Galaxy Canvas — Constellation (Perspectives hero) -->
+  <script>
+  (function() {
+    var canvas = document.getElementById('galaxy-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var W, H;
+
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = canvas.offsetWidth;
+      H = canvas.offsetHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function init() {
+      resize();
+      particles = [];
+
+      var count;
+      if (W < 768) {
+        count = 60;
+      } else if (W < 1200) {
+        count = 100;
+      } else {
+        count = 150;
+      }
+
+      var sizeMult = W < 768 ? 1 : W < 1200 ? 1.15 : 1.3;
+
+      for (var i = 0; i < count; i++) {
+        var isGold = Math.random() < 0.3;
+        particles.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: isGold
+            ? (Math.random() * 2.0 + 1.4) * sizeMult
+            : (Math.random() * 0.9 + 0.4) * sizeMult,
+          baseOpacity: Math.random() * 0.4 + 0.35,
+          phase: Math.random() * Math.PI * 2,
+          twinkleSpeed: Math.random() * 0.015 + 0.006,
+          gold: isGold
+        });
+      }
+    }
+
+    function draw(t) {
+      ctx.clearRect(0, 0, W, H);
+
+      // Central gold nebula — multi-layer for depth
+      var g1 = ctx.createRadialGradient(W * 0.48, H * 0.45, 0, W * 0.48, H * 0.45, W * 0.55);
+      g1.addColorStop(0, 'rgba(201,160,82,0.08)');
+      g1.addColorStop(0.25, 'rgba(201,160,82,0.04)');
+      g1.addColorStop(0.55, 'rgba(160,120,60,0.015)');
+      g1.addColorStop(1, 'transparent');
+      ctx.fillStyle = g1;
+      ctx.fillRect(0, 0, W, H);
+
+      // Secondary asymmetric glow
+      var g2 = ctx.createRadialGradient(W * 0.3, H * 0.38, 0, W * 0.3, H * 0.38, W * 0.28);
+      g2.addColorStop(0, 'rgba(201,160,82,0.03)');
+      g2.addColorStop(1, 'transparent');
+      ctx.fillStyle = g2;
+      ctx.fillRect(0, 0, W, H);
+
+      // Tertiary glow — top right for balance
+      var g3 = ctx.createRadialGradient(W * 0.7, H * 0.3, 0, W * 0.7, H * 0.3, W * 0.2);
+      g3.addColorStop(0, 'rgba(201,160,82,0.02)');
+      g3.addColorStop(1, 'transparent');
+      ctx.fillStyle = g3;
+      ctx.fillRect(0, 0, W, H);
+
+      var maxDist = W < 768 ? 100 : W < 1200 ? 130 : 200;
+
+      // PASS 1: Draw connecting lines first (behind particles)
+      ctx.lineWidth = 0.5;
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        if (!p.gold) continue;
+        for (var j = i + 1; j < particles.length; j++) {
+          var q = particles[j];
+          if (!q.gold && Math.random() > 0.5) continue;
+          var dx = p.x - q.x, dy = p.y - q.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < maxDist) {
+            var lineOpacity = 0.20 * (1 - dist / maxDist);
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = 'rgba(201,160,82,' + lineOpacity + ')';
+            ctx.stroke();
+          }
+        }
+      }
+
+      // PASS 2: Draw particles on top
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        p.phase += p.twinkleSpeed;
+        var flicker = 0.5 + 0.5 * Math.sin(p.phase + t * 0.0008);
+        var opacity = p.baseOpacity * flicker;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        if (p.gold) {
+          ctx.fillStyle = 'rgba(201,160,82,' + opacity + ')';
+        } else {
+          ctx.fillStyle = 'rgba(232,228,220,' + (opacity * 0.6) + ')';
+        }
+        ctx.fill();
+
+        if (p.gold) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(201,160,82,' + (0.04 * flicker) + ')';
+          ctx.fill();
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    init();
+    window.addEventListener('resize', function() { init(); });
+    requestAnimationFrame(draw);
+  })();
   </script>
 
 </body>
