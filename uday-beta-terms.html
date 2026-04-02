@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UDAY Beta — Participation Agreement & Privacy Policy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0B0E17;
+      --surface: #13172A;
+      --gold: #C9A052;
+      --gold-light: #e0b96a;
+      --text: #E8E4DC;
+      --text-muted: #8A8A9A;
+      --border: rgba(201,160,82,0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+      background: var(--surface);
+    }
+
+    header .logo {
+      font-family: 'Lora', serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: rgba(201,160,82,0.1);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px 32px;
+      margin-bottom: 48px;
+    }
+
+    .toc h3 {
+      font-family: 'Lora', serif;
+      font-size: 14px;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .toc ol {
+      padding-left: 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .toc li {
+      margin-bottom: 6px;
+    }
+
+    .toc a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--gold);
+    }
+
+    section {
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child {
+      border-bottom: none;
+    }
+
+    .section-number {
+      font-family: 'Lora', serif;
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 300;
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    .highlight-box {
+      background: rgba(201,160,82,0.06);
+      border-left: 3px solid var(--gold);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+      margin: 20px 0;
+    }
+
+    .highlight-box p {
+      margin-bottom: 0;
+      color: var(--text);
+      font-size: 14px;
+      font-style: italic;
+      font-family: 'Lora', serif;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    th {
+      background: rgba(201,160,82,0.1);
+      color: var(--gold);
+      padding: 10px 16px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      border: 1px solid var(--border);
+    }
+
+    td {
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px 32px;
+    }
+
+    .contact-card p {
+      margin-bottom: 6px;
+    }
+
+    .contact-card a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .version-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="https://sgcubeconsultants.github.io/sgcube-website" class="logo">SGCube Consultants</a>
+</header>
+
+<div class="hero">
+  <span class="badge">Beta Programme</span>
+  <h1>UDAY — Beta Participation Agreement<br /><span>&amp; Privacy Policy</span></h1>
+  <p>Version 1.0 &nbsp;|&nbsp; Effective: April 2026</p>
+</div>
+
+<main>
+
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#s1">About This Agreement</a></li>
+      <li><a href="#s2">Nature of Beta Participation</a></li>
+      <li><a href="#s3">Confidentiality and Non-Disclosure</a></li>
+      <li><a href="#s4">Data We Collect</a></li>
+      <li><a href="#s5">How We Use Your Data</a></li>
+      <li><a href="#s6">Data Storage and Security</a></li>
+      <li><a href="#s7">Your Rights</a></li>
+      <li><a href="#s8">Third Party Services</a></li>
+      <li><a href="#s9">No Warranty</a></li>
+      <li><a href="#s10">Governing Law</a></li>
+      <li><a href="#s11">Changes to This Agreement</a></li>
+      <li><a href="#s12">Contact</a></li>
+    </ol>
+  </div>
+
+  <section id="s1">
+    <span class="section-number">Section 01</span>
+    <h2>About This Agreement</h2>
+    <p>This Beta Participation Agreement and Privacy Policy ("Agreement") governs your participation in the closed beta testing programme for <strong>UDAY</strong> ("the App"), a discipline tracking application currently under development. The App is owned and operated by <strong>Sayantan Ghosh</strong>, operating through <strong>SGCube Consultants</strong> ("we," "us," "the Founder").</p>
+    <div class="highlight-box">
+      <p>By tapping "I Agree and Continue," you confirm that you have read, understood, and agree to be bound by all terms of this Agreement.</p>
+    </div>
+  </section>
+
+  <section id="s2">
+    <span class="section-number">Section 02</span>
+    <h2>Nature of Beta Participation</h2>
+    <p><strong>2.1</strong> You are participating in this beta programme as a voluntary tester. Your participation does not constitute any form of employment, freelance engagement, contractual service, or commercial relationship with the Founder or SGCube Consultants.</p>
+    <p><strong>2.2</strong> Your participation carries no expectation of, and you hereby waive any claim to, monetary compensation, equity, revenue share, profit participation, royalties, or any other financial interest in the App, its parent product, or any future commercial proceeds arising from the App or any related product.</p>
+    <p><strong>2.3</strong> Any feedback, suggestions, bug reports, ideas, or improvements you provide during the beta programme may be freely used by the Founder to develop, improve, or modify the App, without any obligation to compensate you, credit you, or seek further consent.</p>
+    <p><strong>2.4</strong> You acknowledge that the App is in an early development stage. It may contain bugs, errors, or incomplete features. You agree to use it at your own risk.</p>
+  </section>
+
+  <section id="s3">
+    <span class="section-number">Section 03</span>
+    <h2>Confidentiality and Non-Disclosure</h2>
+    <p><strong>3.1</strong> The App, its features, design, architecture, user interface, and functionality are confidential and proprietary. You agree not to disclose, describe, reproduce, or share any aspect of the App — including screenshots, screen recordings, or verbal descriptions of unreleased features — with any third party without prior written permission from the Founder.</p>
+    <p><strong>3.2</strong> This confidentiality obligation remains in effect for <strong>24 months</strong> from the date of your beta access, or until the App is publicly launched, whichever is earlier.</p>
+    <p><strong>3.3</strong> You agree not to reverse engineer, decompile, copy, replicate, or attempt to extract the App's source code, logic, algorithms, or design.</p>
+  </section>
+
+  <section id="s4">
+    <span class="section-number">Section 04</span>
+    <h2>Data We Collect</h2>
+    <p>During your participation in the beta programme, we collect the following personal data:</p>
+    <ul>
+      <li>Full name</li>
+      <li>Phone number</li>
+      <li>Email address</li>
+      <li>Your unique beta access code</li>
+      <li>In-app usage data (pillar scores, daily logs, FIRE calculator inputs, streaks, and session data)</li>
+      <li>Device type and operating system version</li>
+      <li>Timestamp of activity</li>
+    </ul>
+    <p>You confirm that all personal data you submit is your own and not data belonging to any third party.</p>
+  </section>
+
+  <section id="s5">
+    <span class="section-number">Section 05</span>
+    <h2>How We Use Your Data</h2>
+    <p><strong>5.1</strong> Your data is collected solely for the following purposes:</p>
+    <ul>
+      <li>To identify you as a verified beta tester</li>
+      <li>To improve the App's features, performance, and user experience</li>
+      <li>To communicate with you about the beta programme</li>
+      <li>To understand how users interact with the App</li>
+    </ul>
+    <p><strong>5.2</strong> Your data will not be used for advertising, marketing to third parties, or sold or licensed to any external entity.</p>
+    <p><strong>5.3</strong> Aggregate, anonymised insights derived from beta usage may be used by the Founder for product decision-making.</p>
+  </section>
+
+  <section id="s6">
+    <span class="section-number">Section 06</span>
+    <h2>Data Storage and Security</h2>
+    <p><strong>6.1</strong> Your personal data is stored on <strong>MongoDB Atlas</strong> (AWS Mumbai region, ap-south-1) and is accessible only to the Founder.</p>
+    <p><strong>6.2</strong> Reasonable technical and organisational security measures are in place to protect your data. However, no system is entirely secure, and we cannot guarantee absolute protection.</p>
+    <p><strong>6.3</strong> Your data will be retained for the duration of the beta programme and deleted within <strong>90 days</strong> of the App's public launch, unless you request earlier deletion.</p>
+  </section>
+
+  <section id="s7">
+    <span class="section-number">Section 07</span>
+    <h2>Your Rights</h2>
+    <p>Under applicable Indian law including the <strong>Digital Personal Data Protection Act, 2023</strong>, you have the right to:</p>
+    <ul>
+      <li>Access the personal data we hold about you</li>
+      <li>Correct inaccurate data</li>
+      <li>Request deletion of your data</li>
+      <li>Withdraw consent and exit the beta programme at any time</li>
+    </ul>
+    <p>To exercise any of these rights, contact: <strong>sgcubeconsultants@gmail.com</strong></p>
+  </section>
+
+  <section id="s8">
+    <span class="section-number">Section 08</span>
+    <h2>Third Party Services</h2>
+    <p>The App uses the following third-party infrastructure during the beta:</p>
+    <table>
+      <tr>
+        <th>Service</th>
+        <th>Purpose</th>
+      </tr>
+      <tr>
+        <td>MongoDB Atlas</td>
+        <td>Database storage</td>
+      </tr>
+      <tr>
+        <td>Railway</td>
+        <td>Backend hosting</td>
+      </tr>
+      <tr>
+        <td>Expo</td>
+        <td>Mobile app delivery</td>
+      </tr>
+    </table>
+    <p>These services process data under their own privacy policies. No personal data is shared with these providers beyond what is technically necessary to run the App.</p>
+  </section>
+
+  <section id="s9">
+    <span class="section-number">Section 09</span>
+    <h2>No Warranty</h2>
+    <p>The App is provided <strong>"as is"</strong> during the beta phase. We make no representations about its reliability, accuracy, or fitness for any particular purpose. We are not liable for any data loss, device issues, or other consequences arising from your use of the App during the beta.</p>
+  </section>
+
+  <section id="s10">
+    <span class="section-number">Section 10</span>
+    <h2>Governing Law</h2>
+    <p>This Agreement is governed by the laws of <strong>India</strong>. Any disputes arising from this Agreement shall be subject to the exclusive jurisdiction of the courts in <strong>Gurugram, Haryana</strong>.</p>
+  </section>
+
+  <section id="s11">
+    <span class="section-number">Section 11</span>
+    <h2>Changes to This Agreement</h2>
+    <p>We may update this Agreement as the App evolves. You will be notified of material changes via the contact details provided during registration.</p>
+  </section>
+
+  <section id="s12">
+    <span class="section-number">Section 12</span>
+    <h2>Contact</h2>
+    <div class="contact-card">
+      <p><strong>Sayantan Ghosh</strong></p>
+      <p>SGCube Consultants</p>
+      <p>Email: <a href="mailto:sgcubeconsultants@gmail.com">sgcubeconsultants@gmail.com</a></p>
+      <p>Location: Gurgaon, Haryana, India</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="version-bar">
+  UDAY Beta Participation Agreement &amp; Privacy Policy &nbsp;|&nbsp; Version 1.0 &nbsp;|&nbsp; April 2026 &nbsp;|&nbsp; SGCube Consultants
+</div>
+
+</body>
+</html>
